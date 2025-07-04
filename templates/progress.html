@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Progres Pencarian</title>
+    <script>
+        function pollStatus() {
+            fetch("/status/{{ task_id }}")
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("status").innerText = 
+                        `📊 ${data.done} dari ${data.total} selesai`;
+
+                    if (data.finished) {
+                        renderTable(data.rows);
+                    } else {
+                        setTimeout(pollStatus, 2000);
+                    }
+                });
+        }
+
+        function renderTable(rows) {
+            const result = document.getElementById("result");
+            let html = `<table border="1"><tr>
+                <th>No</th><th>Tanggal</th><th>Judul</th><th>Ringkasan</th><th>Kategori</th><th>Link</th>
+            </tr>`;
+            rows.forEach((b, i) => {
+                html += `<tr>
+                    <td>${i + 1}</td>
+                    <td>${b.tanggal}</td>
+                    <td>${b.title}</td>
+                    <td>${b.summary}</td>
+                    <td>${b.kategori}</td>
+                    <td><a href="${b.link}" target="_blank">Buka</a></td>
+                </tr>`;
+            });
+            html += "</table>";
+            html += `<br><a href="/download/{{ task_id }}">⬇️ Download CSV</a>`;
+            result.innerHTML = html;
+        }
+
+        window.onload = pollStatus;
+    </script>
+</head>
+<body>
+    <h2>⏳ Sedang memproses berita...</h2>
+    <p id="status">Menunggu hasil...</p>
+    <div id="result"></div>
+</body>
+</html>
