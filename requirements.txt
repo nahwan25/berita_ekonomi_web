@@ -5,4 +5,5 @@ Requests==2.32.4
 urllib3==2.5.0
 Flask==2.2.5
 Werkzeug==2.2.3
+gunicorn==20.1.0
 
