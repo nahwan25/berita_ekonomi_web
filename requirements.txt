@@ -6,4 +6,5 @@ urllib3==2.5.0
 Flask==2.2.5
 Werkzeug==2.2.3
 gunicorn==20.1.0
+lxml==4.9.3
 
