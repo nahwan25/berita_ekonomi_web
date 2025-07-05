@@ -1,6 +1,6 @@
 from groq import Groq
 
-client = Groq(api_key="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")  # Ganti dengan key kamu
+client = Groq(api_key="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")  # Ganti dengan key kamu
 
 def summarize(text):
     if not text or not isinstance(text, str) or len(text.strip()) < 30:
