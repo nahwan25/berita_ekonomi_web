@@ -1,7 +1,7 @@
 from groq import Groq
 
 # Inisialisasi client Groq
-client = Groq(api_key="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")
+client = Groq(api_key="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")
 
 def get_prompt(text):
     return (
@@ -82,7 +82,7 @@ def classify(summary_text):
     try:
         prompt = get_prompt(summary_text)
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="gemma-7b-it",
             messages=[{"role": "user", "content": prompt}]
         )
         label = response.choices[0].message.content.strip()
